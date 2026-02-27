@@ -1,0 +1,17 @@
+# Git internal
+.git/
+
+# Runtime data - NOT needed for restore
+logs/
+delivery-queue/
+*.log
+sessions/
+sandboxes/
+.cache/
+
+# Memory evolution data (auto-generated, can rebuild)
+memory/evolution/
+
+# Node dependencies
+node_modules/
+.DS_Store
