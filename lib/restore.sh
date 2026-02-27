@@ -63,6 +63,17 @@ ocv_restore() {
     dim "  Credential permissions fixed."
   fi
 
+  # Restore extensions from lock file
+  echo ""
+  echo "  Extensions:"
+  if command -v jq &>/dev/null; then
+    source "$LIB_DIR/extensions.sh"
+    restore_extensions
+  else
+    warn "  jq not installed — cannot parse extensions.lock.json"
+    dim "  Install jq, then: openclaw plugins install each extension manually"
+  fi
+
   echo ""
   ok "Restore complete!"
   dim "  Start agent: openclaw"

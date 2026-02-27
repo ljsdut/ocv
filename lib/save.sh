@@ -12,6 +12,12 @@ ocv_save() {
   fi
   msg="${*:-}"
 
+  # Sync extension lock BEFORE clean check (lock change = dirty workspace)
+  if command -v jq &>/dev/null; then
+    source "$LIB_DIR/extensions.sh"
+    sync_extensions_lock
+  fi
+
   # Nothing to save?
   if _is_clean; then
     ok "Nothing changed since last save."

@@ -49,6 +49,13 @@ ocv_status() {
     dim "  Run 'ocv save' to backup."
   fi
 
+  # Extensions
+  if [[ -f "$OCV_HOME/extensions.lock.json" ]] && command -v jq &>/dev/null; then
+    echo ""
+    source "$LIB_DIR/extensions.sh"
+    show_extensions_lock
+  fi
+
   # Auto-save
   echo ""
   if _auto_is_on; then
