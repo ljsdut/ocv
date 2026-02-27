@@ -1,0 +1,28 @@
+{
+  "name": "ocv",
+  "version": "1.0.0",
+  "description": "OpenClaw Version Control - Backup and restore your AI agent with natural language",
+  "main": "index.js",
+  "bin": {
+    "ocv": "./bin/ocv"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "openclaw",
+    "backup",
+    "version-control",
+    "git"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-name/ocv"
+  },
+  "bugs": {
+    "url": "https://github.com/your-name/ocv/issues"
+  },
+  "homepage": "https://github.com/your-name/ocv#readme"
+}

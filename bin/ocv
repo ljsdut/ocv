@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+# OCV — OpenClaw Version Control
+# CLI entry point
+
+set -euo pipefail
+
+OCV_VERSION="1.0.0"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LIB_DIR="$(cd "$SCRIPT_DIR/../lib" && pwd)"
+
+source "$LIB_DIR/common.sh"
+
+case "${1:-help}" in
+  init)
+    source "$LIB_DIR/init.sh"
+    ocv_init "${@:2}"
+    ;;
+  save|s)
+    source "$LIB_DIR/save.sh"
+    ocv_save "${@:2}"
+    ;;
+  restore|r)
+    source "$LIB_DIR/restore.sh"
+    ocv_restore "${@:2}"
+    ;;
+  status|st)
+    source "$LIB_DIR/status.sh"
+    ocv_status "${@:2}"
+    ;;
+  log|l)
+    source "$LIB_DIR/log.sh"
+    ocv_log "${@:2}"
+    ;;
+  rollback|rb)
+    source "$LIB_DIR/rollback.sh"
+    ocv_rollback "${@:2}"
+    ;;
+  auto)
+    source "$LIB_DIR/auto.sh"
+    ocv_auto "${@:2}"
+    ;;
+  remote)
+    need_git
+    _g remote "${@:2}"
+    ;;
+  version|--version)
+    echo "ocv $OCV_VERSION"
+    ;;
+  help|--help|-h|"")
+    cat << 'HELP'
+
+💾 OCV — OpenClaw Version Control
+
+Commands:
+  save   [message]       Save current state           (alias: s)
+  restore <repo-url>     Restore from backup          (alias: r)
+  status                 What changed since last save (alias: st)
+  log    [count]         Save history                 (alias: l)
+  rollback <hash>        Roll back to a previous save (alias: rb)
+  auto   [on|off|status] Toggle auto-save (cron)
+  init   [--remote url]  First-time setup
+  remote                 Git remote management
+
+Examples:
+  ocv init --remote git@github.com:me/my-agent.git
+  ocv save "before experiment"
+  ocv save
+  ocv status
+  ocv log
+  ocv rollback abc1234 --yes
+  ocv auto on
+
+HELP
+    ;;
+  *)
+    err "Unknown command: $1. Run 'ocv help' for usage."
+    ;;
+esac
