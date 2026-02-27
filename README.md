@@ -58,11 +58,12 @@ ocv auto on
 - openclaw.json — 全局配置
 - credentials/ — API Keys
 - workspace/ — 核心工作区 (skills, memory, AGENTS.md, SOUL.md 等)
-- extensions/ — 扩展
+- extensions.lock.json — Extension 版本清单
 - skills/ — managed skills
 - memory/ — 记忆数据
 
 **不备份** (.gitignore)：
+- extensions/ — Extension 源码（通过 lock 文件记录，恢复时自动安装）
 - sessions/ — 运行时会话
 - sandboxes/ — 沙箱
 - .cache/ — 缓存
